@@ -6,6 +6,7 @@ const PAPER = 'PAPER';
 const SCISSORS = 'SCISSORS';
 const DEFAULT_USER_CHOICE = ROCK;
 const RESULT_DRAW = 'DRAW';
+let isGameRunning = false;
 const RESULT_PLAYER_WINS = 'the player won the game';
 const RESULT_COMPUTER_WINS = 'the computer won the game'
 
@@ -31,22 +32,45 @@ const getPlayerChoice = () =>{
     }
     // adding the computer choice here
   
-    const getComputerChoice = () =>{
-      const randomValue = Math.random();
-      if(randomValue < 0.34){
-        return ROCK;
-      } else if(randomValue < 0.70){
-        return PAPER;
-      } else {
-        return SCISSORS;
-      }
-    };
+    
 }
-
+const getComputerChoice = () =>{
+  const randomValue = Math.random();
+  if(randomValue < 0.34){
+    return ROCK;
+  } else if(randomValue < 0.70){
+    return PAPER;
+  } else {
+    return SCISSORS;
+  }
+};
 const getWinner = (computerChoice, playerChoice) =>{
 if(computerChoice === playerChoice){
-   
+   return RESULT_DRAW;
+} else if (computerChoice === ROCK && playerChoice === PAPER || 
+           computerChoice === PAPER && playerChoice === SCISSORS ||
+          computerChoice === SCISSORS && playerChoice === ROCK) {
+  return RESULT_PLAYER_WINS;
+} else if(playerChoice === PAPER && computerChoice === ROCK ||
+          playerChoice === PAPER && computerChoice === SCISSORS ||
+          playerChoice === SCISSORS && computerChoice === ROCK){
+
+            return RESULT_COMPUTER_WINS;
 }
 }
 
-startGameButton.addEventListener('click', getPlayerChoice 
+startGameButton.addEventListener('click', e =>{
+  e.preventDefault();
+  if(isGameRunning){
+    return;
+
+  }
+  isGameRunning = true;
+  console.log('The Game is starting....');
+  const playerChoose = getPlayerChoice();
+  const computerChoose = getComputerChoice();
+  getWinner(computerChoose, playerChoose);
+  const winner = getWinner(computerChoose, playerChoose);
+  console.log(winner); 
+  
+})
