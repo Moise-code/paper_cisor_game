@@ -84,3 +84,17 @@ startGameButton.addEventListener('click', e =>{
   alert(message);
   isGameRunning = false;
 })
+
+// not related to the game
+// by addign the three dots in front of the argument makes it be stored as the array, instead of calling the arguments as array in the function call.
+// with the rest operator helps you to double call the function.
+// you can't have two rest operators instead you can have some arguments before the rest operator.
+const sumUp = (...numbers) =>{
+  let sum = 0;
+  for(const num of numbers){
+    sum += num;
+  }
+  return sum;
+}
+console.log(sumUp(1,2,3,4,5,6,67,6));
+console.log(sumUp(1,2,344,5,56,665,6656,65))
